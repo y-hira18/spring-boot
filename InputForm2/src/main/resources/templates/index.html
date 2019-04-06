@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>index</title>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/index.js" th:src="@{/js/index.js}"></script>
+</head>
+<body>
+
+	<form action="#" th:action="@{/index}" th:object="${jsonObject}"
+		method="get">
+		<div>
+			<input type="text" th:field="*{inputMessage}" />
+			<br />
+			<input type="text" id="outputMessage" />
+			<br />
+			<button type="button" id="button">上のボックスに入力した値を下のボックスに表示</button>
+		</div>
+		<p />
+		<div>
+			<select th:field="*{selectItem}">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+			<input type="text" id="selectedItem" placeholder="選択した値を表示" />
+		</div>
+	</form>
+
+</body>
+</html>
