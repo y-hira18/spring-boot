@@ -12,8 +12,8 @@ namespace SampleAppTest
         [TestMethod]
         public void PropertyClassConstructor()
         {
-            //var propertyClass = new PropertyClass(str);
-            //Assert.AreEqual(str, propertyClass.Str);
+            var propertyClass = new PropertyClass(str);
+            Assert.AreEqual(str, propertyClass.Str);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace SampleApp
             //Console.WriteLine(MethodClass.Method1());
             //Console.WriteLine(new PropertyClass("str").Str);
             //Console.WriteLine(MethodClass.Method3(new PropertyClass("str")));
-
         }
     }
 }

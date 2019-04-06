@@ -12,13 +12,15 @@ namespace Sample
         public static void Main(string[] args)
         {
             var fileNameList = new List<string>();
+
             ReadFileName(fileNameList);
+            WriteTime();
+
+            // 動作確認用
             foreach (var fileName in fileNameList)
             {
                 Console.WriteLine(fileName);
             }
-
-            WriteTime();
         }
 
         private static void ReadFileName(List<string> fileNameList)

@@ -14,15 +14,18 @@ namespace SampleAppTest
         [TestMethod]
         public void Method1Test()
         {
-            Assert.AreEqual(Method1Str, MethodClass.Method1());
+            Mock<MethodClass> mockMethodClass = new Mock<MethodClass>();
+            mockMethodClass.Setup(Method => Method.)
+
+            Assert.AreEqual(Method1Str, mockMethodClass.Object);
         }
 
         [TestMethod]
         public void Method3Test()
         {
-            Mock<PropertyClass> mockPropertyClass = new Mock<PropertyClass>();
-            mockPropertyClass.SetupGet(property => property.Str).Returns(Method3Str);
-            Assert.AreEqual(Method3Str, mockPropertyClass.Object.Str);
+            //Mock<PropertyClass> mockPropertyClass = new Mock<PropertyClass>();
+            //mockPropertyClass.SetupGet(property => property.Str).Returns(Method3Str);
+            //Assert.AreEqual(Method3Str, mockPropertyClass.Object.Str);
         }
     }
 }

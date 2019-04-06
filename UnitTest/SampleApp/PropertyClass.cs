@@ -10,9 +10,9 @@ namespace SampleApp
     {
         public string Str { get; }
 
-        //public PropertyClass(string str)
-        //{
-        //    this.Str = str;
-        //}
+        public PropertyClass(string str)
+        {
+            this.Str = str;
+        }
     }
 }
