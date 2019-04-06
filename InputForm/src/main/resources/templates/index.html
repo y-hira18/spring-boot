@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>index</title>
+</head>
+<body>
+
+	<form action="#" th:action="@{/detail}" th:object="${userYear}"
+		method="get">
+		<select th:field="*{year}">
+			<option value="">選択してください</option>
+			<option th:each="year:${yearList}" th:value="${year.key}"
+				th:text="${year.value}"></option>
+		</select>
+		<span>
+			<button type="submit" name="detail" value="registration">追加</button>
+		</span>
+		<span th:text="${message}"></span>
+	</form>
+
+	<p />
+
+	<table>
+		<thead>
+			<tr>
+				<th>学年</th>
+				<th>組</th>
+				<th>名前</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="user:${userList}" th:object="${user}">
+				<td th:text="*{year}"></td>
+				<td th:text="*{group}"></td>
+				<td th:text="*{name}"></td>
+				<td><a
+					th:href="@{/detail(detail=change,year=*{year},group=*{group},name=*{name})}"><button>変更</button></a></td>
+				<td><a
+					th:href="@{/detail(detail=delete,year=*{year},group=*{group},name=*{name})}"><button>削除</button></a></td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>
