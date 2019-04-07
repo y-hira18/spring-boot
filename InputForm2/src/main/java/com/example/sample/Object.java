@@ -1,6 +1,6 @@
 package com.example.sample;
 
-public class JsonObject {
+public class Object {
 
 	private String inputMessage;
 	private int selectItem;

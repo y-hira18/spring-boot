@@ -3,7 +3,7 @@
  */
 $(function() {
 	// ボタンクリックで入力値を表示する
-	$('#button').click(function() {
+	$('#inputMessageSubmit').click(function() {
 
 		$.ajax({
 			type : 'get',
@@ -35,6 +35,28 @@ $(function() {
 		}).then(
 				function(data) {
 					$('#selectedItem').val(data.selectItem);
+				},
+				function(XMLHttpRequest, textStatus, errorThrown) {
+					alert('error:' + XMLHttpRequest + '/' + textStatus
+							+ '/' + errorThrown);
+				});
+	});
+
+	// 入力値をテーブルに表示する
+	$('#submit').click(function() {
+
+		// fragment(HTML)を取得する
+		$.ajax({
+			type : 'get',
+			url : '/getInputValue',
+			data : {
+				inputMessage : $('#inputMessage').val(),
+				selectItem : $('#selectItem').val()
+			},
+			dataType : 'html'
+		}).then(
+				function(data) {
+					$('#result').html(data);
 				},
 				function(XMLHttpRequest, textStatus, errorThrown) {
 					alert('error:' + XMLHttpRequest + '/' + textStatus

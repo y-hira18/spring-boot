@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+	<div th:fragment="resultTable">
+		<table>
+			<thead>
+				<tr>
+					<th>inputMessage</th>
+					<th>selectItem</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="object:${objectList}" th:object="${object}">
+					<td th:text="*{inputMessage}"></td>
+					<td th:text="*{selectItem}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>
