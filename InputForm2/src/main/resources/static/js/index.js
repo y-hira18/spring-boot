@@ -2,7 +2,7 @@
  *
  */
 $(function() {
-	// Ajax通信テスト ボタンクリック
+	// ボタンクリックで入力値を表示する
 	$('#button').click(function() {
 
 		$.ajax({
@@ -22,7 +22,7 @@ $(function() {
 				});
 	});
 
-	// Ajax通信テスト セレクトボックス
+	// セレクトボックスで選択した値を表示する
 	$('#selectItem').change(function() {
 
 		$.ajax({
