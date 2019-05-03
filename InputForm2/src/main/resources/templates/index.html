@@ -8,27 +8,20 @@
 </head>
 <body>
 
-	<form action="#" th:action="@{/index}" th:object="${object}"
-		method="get">
-		<div>
-			<input type="text" th:field="*{inputMessage}" />
-			<br />
-			<input type="text" id="outputMessage" />
-			<br />
-			<button type="button" id="inputMessageSubmit">上のボックスに入力した値を下のボックスに表示</button>
-		</div>
-		<p />
-		<div>
-			<select th:field="*{selectItem}">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-			</select>
-			<input type="text" id="selectedItem" placeholder="選択した値を表示" />
-		</div>
-		<p />
-		<button type="button" id="submit">入力値をテーブルに表示</button>
-	</form>
+	<input type="text" id="inputMessage" />
+	<br />
+	<input type="text" id="outputMessage" />
+	<br />
+	<button type="button" id="inputMessageSubmit">上のボックスに入力した値を下のボックスに表示</button>
+	<p />
+	<select id="selectItem">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+	</select>
+	<input type="text" id="selectedItem" placeholder="選択した値を表示" />
+	<p />
+	<button type="button" id="submit">入力値をテーブルに表示</button>
 
 	<p />
 

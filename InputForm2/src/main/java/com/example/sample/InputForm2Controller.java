@@ -15,10 +15,6 @@ public class InputForm2Controller {
 
 	@RequestMapping(value="/index")
 	public String index(Model model) {
-
-		Object object = new Object();
-		model.addAttribute("object", object);
-
 		return "index";
 	}
 
