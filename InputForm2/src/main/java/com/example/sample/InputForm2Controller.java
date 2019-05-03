@@ -13,8 +13,49 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class InputForm2Controller {
 
+	List<Food> foodList = new ArrayList<>();
+
 	@RequestMapping(value="/index")
 	public String index(Model model) {
+
+		foodList = new ArrayList<>();
+		List<FoodClassification> foodClassificationList = new ArrayList<>();
+
+		FoodClassification vegetable = new FoodClassification();
+		FoodClassification fruit = new FoodClassification();
+		vegetable.setClassificationId(1);
+		vegetable.setClassificationName("野菜");
+		fruit.setClassificationId(2);
+		fruit.setClassificationName("果物");
+		foodClassificationList.add(vegetable);
+		foodClassificationList.add(fruit);
+
+		Food tomato = new Food();
+		Food lettuce = new Food();
+		Food strawberry = new Food();
+		Food peach = new Food();
+		tomato.setFoodId(1);
+		tomato.setFoodName("トマト");
+		tomato.setClassificationId(1);
+		lettuce.setFoodId(2);
+		lettuce.setFoodName("レタス");
+		lettuce.setClassificationId(1);
+		strawberry.setFoodId(3);
+		strawberry.setFoodName("苺");
+		strawberry.setClassificationId(2);
+		peach.setFoodId(4);
+		peach.setFoodName("桃");
+		peach.setClassificationId(2);
+		foodList.add(tomato);
+		foodList.add(lettuce);
+		foodList.add(strawberry);
+		foodList.add(peach);
+
+		List<Food> foodListLinkToClassification = getFoodListLinkToClassification(1);
+
+		model.addAttribute("classificationList", foodClassificationList);
+		model.addAttribute("foodListLinkToClassification", foodListLinkToClassification);
+
 		return "index";
 	}
 
@@ -47,5 +88,20 @@ public class InputForm2Controller {
 		model.addAttribute("objectList", objectList);
 
 		return "index :: resultTable";
+	}
+
+	@RequestMapping(value="/getFoodListLinkToClassification", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Food> getFoodListLinkToClassification(@RequestParam("classificationId") int classificationId) {
+
+		List<Food> foodListLinkToClassification = new ArrayList<>();
+
+		for (Food food : foodList) {
+			if (food.getClassificationId() == classificationId) {
+				foodListLinkToClassification.add(food);
+			}
+		}
+
+		return foodListLinkToClassification;
 	}
 }

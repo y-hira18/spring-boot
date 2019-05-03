@@ -63,4 +63,32 @@ $(function() {
 							+ '/' + errorThrown);
 				});
 	});
+
+	// 左のセレクトボックスで選択した分類に紐づく食品を右のセレクトボックスに表示する
+	$('#classification').change(function() {
+
+		$.ajax({
+			type : 'get',
+			url : '/getFoodListLinkToClassification',
+			data : {
+				classificationId : $('#classification').val()
+			},
+			dataType : 'json'
+		}).then(
+				function(data) {
+
+					document.getElementById("food").options.length = 0;
+
+					$.each(data, function(index, value) {
+						let option = document.createElement("option");
+						option.text = value.foodName;
+						option.value = value.foodId;
+						document.getElementById("food").appendChild(option);
+					});
+				},
+				function(XMLHttpRequest, textStatus, errorThrown) {
+					alert('error:' + XMLHttpRequest + '/' + textStatus
+							+ '/' + errorThrown);
+				});
+	});
 });
