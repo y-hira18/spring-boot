@@ -13,13 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class InputForm2Controller {
 
-	List<Food> foodList = new ArrayList<>();
-
 	@RequestMapping(value="/index")
 	public String index(Model model) {
 
-		foodList = new ArrayList<>();
 		List<FoodClassification> foodClassificationList = new ArrayList<>();
+		List<Food> foodList = new ArrayList<>();
 
 		FoodClassification vegetable = new FoodClassification();
 		FoodClassification fruit = new FoodClassification();
@@ -93,6 +91,28 @@ public class InputForm2Controller {
 	@RequestMapping(value="/getFoodListLinkToClassification", method=RequestMethod.GET)
 	@ResponseBody
 	public List<Food> getFoodListLinkToClassification(@RequestParam("classificationId") int classificationId) {
+
+		List<Food> foodList = new ArrayList<>();
+		Food tomato = new Food();
+		Food lettuce = new Food();
+		Food strawberry = new Food();
+		Food peach = new Food();
+		tomato.setFoodId(1);
+		tomato.setFoodName("トマト");
+		tomato.setClassificationId(1);
+		lettuce.setFoodId(2);
+		lettuce.setFoodName("レタス");
+		lettuce.setClassificationId(1);
+		strawberry.setFoodId(3);
+		strawberry.setFoodName("苺");
+		strawberry.setClassificationId(2);
+		peach.setFoodId(4);
+		peach.setFoodName("桃");
+		peach.setClassificationId(2);
+		foodList.add(tomato);
+		foodList.add(lettuce);
+		foodList.add(strawberry);
+		foodList.add(peach);
 
 		List<Food> foodListLinkToClassification = new ArrayList<>();
 
