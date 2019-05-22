@@ -8,26 +8,26 @@
 </head>
 <body>
 
+	<h4>inputMessage</h4>
 	<input type="text" id="inputMessage" />
 	<br />
 	<input type="text" id="outputMessage" />
 	<br />
 	<button type="button" id="inputMessageSubmit">上のボックスに入力した値を下のボックスに表示</button>
-	<p />
+
+	<h4>selectItem</h4>
 	<select id="selectItem">
 		<option value="1">1</option>
 		<option value="2">2</option>
 		<option value="3">3</option>
 	</select>
 	<input type="text" id="selectedItem" placeholder="選択した値を表示" />
-	<p />
-	<button type="button" id="submit">入力値をテーブルに表示</button>
 
-	<p />
+	<p><button type="button" id="submit">入力値をテーブルに表示</button></p>
 
 	<div id="result">
 		<div th:replace="inputResult::resultTable" th:fragment="resultTable">
-		<table>
+		<table border=1>
 			<thead>
 				<tr>
 					<th>inputMessage</th>
@@ -43,9 +43,9 @@
 		</table>
 		</div>
 	</div>
+	<br>
 
-	<p />
-
+	<p>左のセレクトボックスで選択した値によって右のセレクトボックスの選択肢を変更</p>
 	<select id="classification">
 		<option th:each="classification:${classificationList}"
 		th:text="${classification.classificationName}" th:value="${classification.classificationId}" />
