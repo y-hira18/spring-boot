@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class InputFormController {
 
+	// 一覧画面
 	@RequestMapping(value="/index")
 	public String index(Model model) {
-
-		User userYear = new User();
+		User newUser = new User();
 
 		Map<String, String> yearList = new HashMap<>();
 		yearList.put("一年生", "一年生");
@@ -27,26 +27,29 @@ public class InputFormController {
 		yearList.put("三年生", "三年生");
 
 		ArrayList<User> userList = new ArrayList<>();
-		User user = new User();
-		user.setYear("一年生");
-		user.setGroup("一組");
-		user.setName("山田");
-		userList.add(user);
+		User user1 = new User();
+		User user2 = new User();
+		user1.setYear("一年生");
+		user1.setGroup("一組");
+		user1.setName("山田");
+		user2.setYear("二年生");
+		user2.setGroup("二組");
+		user2.setName("田中");
+		userList.add(user1);
+		userList.add(user2);
 
-		model.addAttribute("userYear", userYear);
+		model.addAttribute("newUser", newUser);
 		model.addAttribute("yearList", yearList);
 		model.addAttribute("userList", userList);
 
 		return "index";
 	}
 
+	// 登録画面、変更画面
 	@RequestMapping(value="/detail",method=RequestMethod.GET)
 	public String input(@RequestParam ("detail") String detail, @ModelAttribute User user, Model model) {
-
 		if (user.getYear() == null || user.getYear() == "") {
-
-			model.addAttribute("message", "選択してください");
-
+			model.addAttribute("errorMessage", "選択してください");
 			return index(model);
 		}
 
@@ -62,9 +65,9 @@ public class InputFormController {
 		return "form";
 	}
 
+	// 確認画面
 	@RequestMapping(value="/detail",method=RequestMethod.POST)
 	public String confirm(@RequestParam ("detail") String detail, @Validated @ModelAttribute User user, BindingResult result, Model model) {
-
 		if (result.hasErrors()) {
 			if (detail.equals("confirm_registration")) {
 				return input("registration", user, model);

@@ -2,58 +2,65 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>index</title>
+<title>Ajaxで画面遷移なしに更新する</title>
 <script src="/js/jquery-3.3.1.min.js"></script>
 <script src="/js/index.js" th:src="@{/js/index.js}"></script>
 </head>
 <body>
 
-	<h4>inputMessage</h4>
-	<input type="text" id="inputMessage" />
-	<br />
-	<input type="text" id="outputMessage" />
-	<br />
-	<button type="button" id="inputMessageSubmit">上のボックスに入力した値を下のボックスに表示</button>
+	<div class="section">
+		<div class="sub-section">
+			<h4>■input message</h4>
+			<input type="text" id="input-message" />
+			<input type="text" id="output-message" /><br />
+			<button type="button" id="show-input-message-btn">左のボックスに入力した値を右のボックスに表示</button>
+		</div>
 
-	<h4>selectItem</h4>
-	<select id="selectItem">
-		<option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-	</select>
-	<input type="text" id="selectedItem" placeholder="選択した値を表示" />
+		<div class="sub-section">
+			<h4>■select item</h4>
+			<select id="select-item">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+			<input type="text" id="selected-item" placeholder="選択した値を表示" />
+		</div>
 
-	<p><button type="button" id="submit">入力値をテーブルに表示</button></p>
-
-	<div id="result">
-		<div th:replace="inputResult::resultTable" th:fragment="resultTable">
-		<table border=1>
-			<thead>
-				<tr>
-					<th>inputMessage</th>
-					<th>selectItem</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="object:${objectList}" th:object="${object}">
-					<td th:text="*{inputMessage}"></td>
-					<td th:text="*{selectItem}"></td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="sub-section">
+			<button type="button" id="show-input-value-btn">input message と select item をテーブルに表示</button>
+			<div id="input-value">
+				<div th:replace="input-value-fragment::inputValueTable" th:fragment="inputValueTable" >
+				</div>
+			</div>
 		</div>
 	</div>
-	<br>
 
-	<p>左のセレクトボックスで選択した値によって右のセレクトボックスの選択肢を変更</p>
-	<select id="classification">
-		<option th:each="classification:${classificationList}"
-		th:text="${classification.classificationName}" th:value="${classification.classificationId}" />
-	</select>
-	<select id="food">
-		<option th:each="food:${foodListLinkToClassification}"
-		th:text="${food.foodName}" th:value="${food.foodId}" />
-	</select>
+	<hr>
+
+	<div class="section">
+		<div class="sub-section">
+			<h4>左のセレクトボックスで選択した値によって右のセレクトボックスの選択肢を変更</h4>
+			<select id="food-classification">
+				<option th:each="foodClassification:${foodClassificationList}"
+				th:text="${foodClassification.classificationName}" th:value="${foodClassification.classificationId}" />
+			</select>
+			<select id="classified-food">
+				<option th:each="classifiedFood:${classifiedFoodList}"
+				th:text="${classifiedFood.foodName}" th:value="${classifiedFood.foodId}" />
+			</select>
+		</div>
+	</div>
 
 </body>
+
+<style>
+.sub-section {
+	 margin-top: 30px;
+	 margin-bottom: 30px;
+}
+
+h4 {
+ 	margin-bottom: 0px;
+ }
+</style>
 </html>

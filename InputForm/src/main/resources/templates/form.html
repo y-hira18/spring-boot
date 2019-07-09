@@ -2,32 +2,49 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>form</title>
+<title>Thymeleafでパラメータにより表示画面を切り替え</title>
 </head>
 <body>
+
+	<h1 th:if="${detail.equals('registration')}">登録画面</h1>
+	<h1 th:if="${detail.equals('change')}">変更画面</h1>
+	<h1 th:if="${detail.equals('confirm_registration')}">登録確認画面</h1>
+	<h1 th:if="${detail.equals('confirm_change')}">変更確認画面</h1>
+	<h1 th:if="${detail.equals('delete')}">削除確認画面</h1>
 
 	<form action="#" th:action="@{/detail}" th:object="${user}" method="post">
 		<p>
 			学年 <input readonly th:field="*{year}"></label>
 		</p>
 
-		<p>
-			組 <select th:field="*{group}" th:disabled="${detail.equals('delete')} or ${detail.equals('confirm_registration')} or ${detail.equals('confirm_change')}">
-				<option value="">選択してください</option>
+		<p>組
+			 <select th:field="*{group}"
+				th:disabled="${detail.equals('delete')} or ${detail.equals('confirm_registration')} or ${detail.equals('confirm_change')}">
+				<option value="" hidden>選択してください</option>
 				<option th:each="group:${groupList}" th:value="${group.key}"
 					th:text="${group.value}"></option>
 			</select>
+			<span class="error" th:if="${#fields.hasErrors('*{group}')}" th:errors="*{group}"></span>
 		</p>
 
-		<p>
-			名前 <input th:field="*{name}" th:readonly="${detail.equals('delete')} or ${detail.equals('confirm_registration')} or ${detail.equals('confirm_change')}">
+		<p>名前
+			<input th:field="*{name}"
+				th:readonly="${detail.equals('delete')} or ${detail.equals('confirm_registration')} or ${detail.equals('confirm_change')}">
+			<span class="error" th:if="${#fields.hasErrors('*{name}')}" th:errors="*{name}"></span>
 		</p>
 
-		<button type="submit" name="detail" value="confirm_registration" th:if="${detail.equals('registration')}">登録</button>
-		<button type="submit" name="detail" value="confirm_change" th:if="${detail.equals('change')}">変更</button>
+		<button type="submit" name="detail" value="confirm_registration" th:if="${detail.equals('registration')}">確認</button>
+		<button type="submit" name="detail" value="confirm_change" th:if="${detail.equals('change')}">確認</button>
+		<button type="submit" th:if="${detail.equals('confirm_registration')}">登録</button>
+		<button type="submit" th:if="${detail.equals('confirm_change')}">変更</button>
 		<button type="submit" th:if="${detail.equals('delete')}">削除</button>
-		<button type="submit" th:if="${detail.equals('confirm_registration')} or ${detail.equals('confirm_change')}">確定</button>
 	</form>
 
 </body>
+
+<style>
+.error {
+	color: red;
+}
+</style>
 </html>

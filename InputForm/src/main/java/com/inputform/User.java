@@ -11,9 +11,9 @@ public class User {
 
 	@NotBlank
 	private String year;
-	@NotBlank
+	@NotBlank(message="必須入力項目です")
 	private String group;
-	@NotBlank
+	@NotBlank(message="必須入力項目です")
 	private String name;
 
 	public String getYear() {

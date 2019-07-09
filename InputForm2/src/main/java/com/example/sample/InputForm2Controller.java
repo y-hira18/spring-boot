@@ -15,10 +15,7 @@ public class InputForm2Controller {
 
 	@RequestMapping(value="/index")
 	public String index(Model model) {
-
 		List<FoodClassification> foodClassificationList = new ArrayList<>();
-		List<Food> foodList = new ArrayList<>();
-
 		FoodClassification vegetable = new FoodClassification();
 		FoodClassification fruit = new FoodClassification();
 		vegetable.setClassificationId(1);
@@ -28,31 +25,10 @@ public class InputForm2Controller {
 		foodClassificationList.add(vegetable);
 		foodClassificationList.add(fruit);
 
-		Food tomato = new Food();
-		Food lettuce = new Food();
-		Food strawberry = new Food();
-		Food peach = new Food();
-		tomato.setFoodId(1);
-		tomato.setFoodName("トマト");
-		tomato.setClassificationId(1);
-		lettuce.setFoodId(2);
-		lettuce.setFoodName("レタス");
-		lettuce.setClassificationId(1);
-		strawberry.setFoodId(3);
-		strawberry.setFoodName("苺");
-		strawberry.setClassificationId(2);
-		peach.setFoodId(4);
-		peach.setFoodName("桃");
-		peach.setClassificationId(2);
-		foodList.add(tomato);
-		foodList.add(lettuce);
-		foodList.add(strawberry);
-		foodList.add(peach);
+		List<Food> classifiedFoodList = getClassifiedFoodList(1);
 
-		List<Food> foodListLinkToClassification = getFoodListLinkToClassification(1);
-
-		model.addAttribute("classificationList", foodClassificationList);
-		model.addAttribute("foodListLinkToClassification", foodListLinkToClassification);
+		model.addAttribute("foodClassificationList", foodClassificationList);
+		model.addAttribute("classifiedFoodList", classifiedFoodList);
 
 		return "index";
 	}
@@ -74,24 +50,22 @@ public class InputForm2Controller {
 	}
 
 	@RequestMapping(value="/getInputValue", method=RequestMethod.GET)
-	public String getInputValue(@RequestParam("inputMessage") String inputMessage, @RequestParam("selectItem") int selectItem, Model model) {
-
+	public String getInputValue(
+			@RequestParam("inputMessage") String inputMessage, @RequestParam("selectItem") int selectItem, Model model) {
 		List<Object> objectList = new ArrayList<>();
 		Object object = new Object();
 		object.setInputMessage(inputMessage);
 		object.setSelectItem(selectItem);
 		objectList.add(object);
-		objectList.add(object);
 
 		model.addAttribute("objectList", objectList);
 
-		return "index :: resultTable";
+		return "index :: inputValueTable";
 	}
 
-	@RequestMapping(value="/getFoodListLinkToClassification", method=RequestMethod.GET)
+	@RequestMapping(value="/getClassifiedFoodList", method=RequestMethod.GET)
 	@ResponseBody
-	public List<Food> getFoodListLinkToClassification(@RequestParam("classificationId") int classificationId) {
-
+	public List<Food> getClassifiedFoodList(@RequestParam("classificationId") int classificationId) {
 		List<Food> foodList = new ArrayList<>();
 		Food tomato = new Food();
 		Food lettuce = new Food();
@@ -114,14 +88,14 @@ public class InputForm2Controller {
 		foodList.add(strawberry);
 		foodList.add(peach);
 
-		List<Food> foodListLinkToClassification = new ArrayList<>();
+		List<Food> classifiedFoodList = new ArrayList<>();
 
 		for (Food food : foodList) {
 			if (food.getClassificationId() == classificationId) {
-				foodListLinkToClassification.add(food);
+				classifiedFoodList.add(food);
 			}
 		}
 
-		return foodListLinkToClassification;
+		return classifiedFoodList;
 	}
 }
